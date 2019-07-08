@@ -1,0 +1,5 @@
+<h1 class="heading">Authors</h1>
+<% @authors&.each do |author|%>
+  <p><%= link_to author.name, author_path(author)%></p>
+  <%= render "books_for_author", :author => author%>
+<%end%>

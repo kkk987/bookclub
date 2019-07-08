@@ -1,0 +1,18 @@
+<h1 class= "heading">MyList</h1>
+<%= link_to 'Add new book', new_book_path%>
+<% @books&.each do |book|%>
+  <p class = "book-item">
+    <%=link_to book.title, book_path(book), class: "book-link"%>
+  <%= link_to book.author.name, author_path(book.author), class:"author-link"%>
+  </p>
+<%end%>
+
+<h2>You are following <%= pluralize current_user.following.length, "user" %></h2>
+
+<ul class = "lsit-item">
+  <% current_user.following.each do |user| %>
+  <li>
+    <%= user.name%>
+  </li>
+  <% end %>
+</ul>

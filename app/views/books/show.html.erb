@@ -1,0 +1,52 @@
+<h1><%=@book.title %></h1>
+<p class="book-item">
+  <%= image_tag @book.cover, width: 120 %>
+</p>
+<p><%=link_to @book.author.name, author_path(@book.author)%></p>
+<p><%=@book.genre%></p>
+
+<p><%=link_to 'Home', books_path%></p>
+<p><%=link_to 'Back', :back%></p>
+
+<% if user_signed_in? %>
+   <%if @can_add %>
+     <p class="link book-item"> <%= link_to 'Add to my list', add_book_to_list_path(:id => @book)%></p>
+   <%else%>
+     <p class="link book-item"> <%= link_to 'Remove from my list', @book, method: "delete"%></p>
+   <%end%>
+   <p class = "link book-item">
+      <%= link_to 'Edit Book', edit_book_list_item_path(id: @book.id)%>
+   </p>
+<%end%>
+
+<h1 class="heading">Reviews</h1>
+<p class="book-item">
+  <%= image_tag @book.cover, width: 120 %>
+</p>
+<p class="rating item">Overall Rating: <%= @rating%> </p>
+<%= link_to 'Add a review', new_review_path(book: @book), class: "link item"%>
+<%if @reviews%>
+  <p>Overall Rating: <%= @rating%> </p>
+  <%@reviews.each do |review|%>
+    <div>
+      <p class="rating review-item"><%= "Rating: #{review.rating}"%></p>
+      <p class="username review-item"><%= review.user.name%></p>
+      <p class="review-item"><%= review.comment %></p>
+    </div>
+  <%end%>
+<%end%>
+
+
+<div class = "list-item">
+  <h1><%= pluralize @book.users.length, "user" %> have this book listed</h1>
+  <ul class = "list-item">
+    <% @book.users.each do |user| %>
+      <% if user != current_user %>
+        <li class = "list-item"><%= user.name %></li>
+        <%= form_with url: follow_user_path(user_id: user.id), local: true do |form| %>
+        <%= form.submit "Follow" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>

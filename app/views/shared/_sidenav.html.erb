@@ -1,0 +1,7 @@
+<nav class = "side-nav">
+    <%=link_to 'Books', books_path, class: "nav-link"%>
+    <%=link_to 'Authors', author_path, class: "nav-link"%>
+  <%if user_signed_in?%>
+   <%=link_to 'My List', book_list_items_path, class: "nav-link"%>
+ <%end%>
+</nav>

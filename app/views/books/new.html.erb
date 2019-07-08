@@ -1,0 +1,29 @@
+<% if @book.errors.any?%>
+  <p>
+    <%= @book.errors.full_messages.join()%>
+  </p>
+<%end%>
+
+<%=form_with model: @book, local: true do |form|%>
+  <p>
+    <%=label(:title, 'Title')%>
+    <%= form.text_field :title, required: true, minlength: 1%>
+  </p>
+   <p>
+    <%=label(:genre, 'Genre')%>
+    <%= form.select :genre, options_for_select(["Please choose...","Romance", "Drama", "SciFi", "Memoir"])%>
+  </p>
+  <p>Author</p>
+  <p>   
+    <%=label(:first_name, 'First Name')%>
+    <%= form.text_field :first_name%>
+    <%=label(:last_name, 'Last Name')%>
+    <%= form.text_field :last_name, required: true, minlength: 1%>
+  </p>
+  
+  <p>
+    <%= form.label :cover %>
+    <%= form.file_field :cover %>
+  </p>
+  <%= form.submit "Add book", class: "button"%>
+<%end%>

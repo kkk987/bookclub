@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "mappings": "AEAA,OAAO,CAAC,+EAAI",
+    "sources": [
+        "main.scss",
+        "base/mixins.scss",
+        "base/normalize.scss",
+        "base/globals.scss",
+        "styles/books.scss",
+        "styles/authors.scss"
+    ],
+    "names": [],
+    "file": "main.css"
+}
